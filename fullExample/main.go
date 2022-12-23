@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	fs.Initialize[StartupModule]("fss")
+	fs.Initialize[StartupModule]("demo")
 
 	webapi.Area("/api/1.0/", func() {
 		webapi.RegisterPOST("/product/ToEntity", productApp.ToEntity)
