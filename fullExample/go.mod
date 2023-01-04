@@ -7,7 +7,7 @@ require (
 	github.com/farseer-go/cacheMemory v0.1.1
 	github.com/farseer-go/collections v0.2.1
 	github.com/farseer-go/eventBus v0.1.0
-	github.com/farseer-go/fs v0.5.1-0.20230101111313-3216f37fdc4b
+	github.com/farseer-go/fs v0.5.1-0.20230104092140-5fa094db9243
 	github.com/farseer-go/mapper v0.2.0
 	github.com/farseer-go/queue v0.1.0
 	github.com/farseer-go/webapi v0.2.0
