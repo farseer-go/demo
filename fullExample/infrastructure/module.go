@@ -3,10 +3,8 @@ package infrastructure
 import (
 	"fullExample/domain/products/product"
 	"fullExample/infrastructure/repository"
-	"github.com/farseer-go/cache"
 	"github.com/farseer-go/cacheMemory"
 	"github.com/farseer-go/eventBus"
-	"github.com/farseer-go/fs/container"
 	"github.com/farseer-go/fs/modules"
 	"github.com/farseer-go/queue"
 )
@@ -26,8 +24,7 @@ func (module Module) Initialize() {
 
 func (module Module) PostInitialize() {
 	// 注册进程缓存
-	cache.SetProfilesInMemory[product.DomainObject]("product", "Id", 0)
-	productCache := container.Resolve[cache.ICacheManage[product.DomainObject]]("product")
+	productCache := cacheMemory.SetProfiles[product.DomainObject]("product", "Id", 0)
 	productCache.Set(
 		product.DomainObject{Id: 1, Price: 8999, Caption: "Apple iPhone 14 Pro Max", Desc: "Apple iPhone 14 Pro Max (A2896) 512GB 银色 支持移动联通电信5G 双卡双待手机", ImgSrc: "https://img10.360buyimg.com/n1/s450x450_jfs/t1/52631/5/21888/20074/63191b75E9234fd5f/1ce070cb00b6f896.jpg.avif"},
 		product.DomainObject{Id: 2, Price: 4500, Caption: "戴森吸尘器V12", Desc: "戴森（DYSON）V12 Detect Slim Fluffy轻量手持吸尘器大吸力", ImgSrc: "https://img13.360buyimg.com/n1/jfs/t1/19688/36/16587/116628/6392d71cEaf3517f1/f8540270aa837711.jpg.avif"},
