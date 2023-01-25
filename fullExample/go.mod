@@ -10,7 +10,7 @@ require (
 	github.com/farseer-go/fs v0.6.1-0.20230125073549-bf337aa75be9
 	github.com/farseer-go/mapper v0.2.1-0.20230104092704-c6bf4238349f
 	github.com/farseer-go/queue v0.1.1-0.20230104092705-a7ab611f09c3
-	github.com/farseer-go/webapi v0.2.1-0.20230105080617-be4f8ad3c26d
+	github.com/farseer-go/webapi v0.2.1-0.20230125111210-5900613c3ad4
 )
 
 require (

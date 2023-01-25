@@ -10,9 +10,11 @@ func main() {
 	fs.Initialize[StartupModule]("demo")
 
 	webapi.Area("/api/1.0/", func() {
+		// get http://localhost:8888/api/1.0/product/info?productId=1
 		webapi.RegisterGET("/product/info", productApp.ToEntity)
-		webapi.RegisterGET("/product/info/{productId}", productApp.ToEntity)
-		webapi.RegisterGET("/product/list-{pageSize}-{pageIndex}", productApp.ToList, "pageIndex", "pageSize", "repository")
+
+		// get http://localhost:8888/api/1.0/product/list?pageIndex=1&pageSize=3
+		webapi.RegisterGET("/product/list", productApp.ToList, "pageIndex", "pageSize", "repository")
 	})
 	webapi.UseApiResponse()
 	webapi.Run()
