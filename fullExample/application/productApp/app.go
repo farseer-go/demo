@@ -1,7 +1,7 @@
 package productApp
 
 import (
-	"fullExample/domain/products/product"
+	"fullExample/domain/product"
 	"github.com/farseer-go/collections"
 	"github.com/farseer-go/mapper"
 )

@@ -1,27 +1,50 @@
 package repository
 
 import (
-	"fullExample/domain/products/product"
-	"github.com/farseer-go/cache"
+	"fullExample/domain/product"
+	"fullExample/infrastructure/repository/model"
 	"github.com/farseer-go/collections"
+	"github.com/farseer-go/data"
 	"github.com/farseer-go/fs/container"
+	"github.com/farseer-go/mapper"
 )
 
-func RegisterProductRepository() {
+// InitProduct 注册产品仓储 ioc product.Repository
+func InitProduct() {
 	container.Register(func() product.Repository {
-		return &productRepository{}
+		// 初始化数据库上下文
+		// default = farseer.yaml > Database.default
+		// true = autoCreateTable
+		return data.NewContext[ProductRepository]("default", true)
 	})
 }
 
-type productRepository struct {
-	DB cache.ICacheManage[product.DomainObject] `inject:"product"`
+type ProductRepository struct {
+	// 定义数据库表映射TableSet
+	Product data.TableSet[model.ProductPO] `data:"name=farseer_go_product"`
 }
 
-func (p *productRepository) ToEntity(productId int) product.DomainObject {
-	item, _ := p.DB.GetItem(productId)
-	return item
+func (p *ProductRepository) ToEntity(productId int) product.DomainObject {
+	po := p.Product.Where("id", productId).ToEntity()
+	// po 转 do
+	return mapper.Single[product.DomainObject](&po)
 }
 
-func (p *productRepository) ToList(pageIndex int, pageSize int) collections.PageList[product.DomainObject] {
-	return p.DB.Get().ToPageList(pageSize, pageIndex)
+func (p *ProductRepository) ToList(pageSize, pageIndex int) collections.PageList[product.DomainObject] {
+	lstProduct := p.Product.ToPageList(pageSize, pageIndex)
+
+	// po 转 do
+	var lst collections.PageList[product.DomainObject]
+	lstProduct.MapToPageList(&lst)
+
+	return lst
+}
+
+func (p *ProductRepository) Count() int64 {
+	return p.Product.Count()
+}
+
+func (p *ProductRepository) Add(product product.DomainObject) {
+	po := mapper.Single[model.ProductPO](&product)
+	_ = p.Product.Insert(&po)
 }
