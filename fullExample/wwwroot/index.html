@@ -102,7 +102,7 @@
     <div class="layui-col-md3">
         <div class="layui-panel" style="text-align: center">
             <div style="padding: 10px;"><img style="width:200px;height: 200px" src="{{$value.ImgSrc}}" /></div>
-            <div><span class="price"><i>¥</i><span class="price_txt">{{$value.Price}}.<span class="price_txt-decimal">00</span></span></span> 库存 <span style="color:blue;font-weight: 700;">{{$value.Stock}}</span></div>
+            <div><span class="price"><i>¥</i><span class="price_txt">{{$value.Price}}.<span class="price_txt-decimal">00</span></span></span> 库存 <span style="color:#e1251b;font-weight: 700;" id="stock_{{$value.Id}}">{{$value.Stock}}</span></div>
             <div>{{$value.Caption}}</div>
         </div>
     </div>

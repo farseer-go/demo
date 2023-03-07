@@ -28,7 +28,7 @@ func main() {
 		webapi.RegisterGET("/product/info", productApp.ToEntity)
 
 		// get http://localhost:8888/api/1.0/product/list?pageIndex=1&pageSize=3
-		webapi.RegisterGET("/product/list", productApp.ToList, "cateId", "pageSize", "pageIndex", "repository")
+		webapi.RegisterGET("/product/list", productApp.ToList, "cateId", "pageSize", "pageIndex", "productRepository", "stockRepository")
 	})
 
 	// 让所有的返回值，包含在core.ApiResponse中

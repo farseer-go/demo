@@ -19,13 +19,13 @@ func (module Module) DependsModule() []modules.FarseerModule {
 	// 使用到了redis模块、data(orm)模块、eventBus（事件总线）模块、queue（本地队列）模块
 	return []modules.FarseerModule{redis.Module{}, data.Module{}, eventBus.Module{}, queue.Module{}}
 }
-func (module Module) PreInitialize() {}
-func (module Module) Initialize()    {}
 func (module Module) PostInitialize() {
 	// 初始化产品分类仓储
 	repository.InitProCate()
 	// 初始化产品仓储
 	repository.InitProduct()
+	// 初始化产品仓储
+	repository.InitStock()
 
 	// 为了方便演示，自动初始化产品分类
 	procateRepository := container.Resolve[procate.Repository]()
@@ -53,5 +53,3 @@ func (module Module) PostInitialize() {
 		productRepository.Add(product.DomainObject{Cate: product.CateEO{Id: 6, Name: "戴森"}, Stock: 100, Price: 2999, Caption: "戴森吹风机 HD08 长春花蓝礼盒款", Desc: "戴森(Dyson) 吹风机 Dyson Supersonic 电吹风 负离子 进口家用 礼物推荐 HD08 长春花蓝礼盒款", ImgSrc: "https://img14.360buyimg.com/n1/jfs/t1/126497/34/30895/26643/63490c3dEbc9de636/9cd45e32ca3b1e05.jpg"})
 	}
 }
-
-func (module Module) Shutdown() {}

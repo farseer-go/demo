@@ -3,7 +3,7 @@ package model
 // OrderPO 订单
 type OrderPO struct {
 	Id             int64   `gorm:"primaryKey;autoIncrement;comment:订单ID"`
-	ProductId      int     `gorm:"type:int;not null;comment:产品ID"`
+	ProductId      int64   `gorm:"type:int;not null;comment:产品ID"`
 	ProductCaption string  `gorm:"size:32;not null;comment:产品名称"`
 	ProductDesc    string  `gorm:"size:512;not null;comment:产品描述"`
 	ProductImgSrc  string  `gorm:"size:256;not null;comment:产品图片"`
