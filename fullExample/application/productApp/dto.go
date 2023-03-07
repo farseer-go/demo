@@ -6,4 +6,5 @@ type DTO struct {
 	Desc    string  // 产品描述
 	ImgSrc  string  // 产品图片
 	Price   float32 // 产品价格
+	Stock   int     // 库存
 }
