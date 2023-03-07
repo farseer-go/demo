@@ -22,6 +22,6 @@ func ProductReplenishmentJob(context *tasks.TaskContext) {
 		productDO := lstProduct.Index(i)
 		stockRepository.Set(productDO.Id, stockVal)
 
-		flog.Infof("产品%d %s 补货%d件", productDO.Id, productDO.Caption, stockVal)
+		flog.Infof("产品%d %s 补货%s件", productDO.Id, productDO.Caption, flog.Red(stockVal))
 	}
 }
