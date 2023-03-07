@@ -30,13 +30,18 @@ func (p *ProductRepository) ToEntity(productId int) product.DomainObject {
 	return mapper.Single[product.DomainObject](&po)
 }
 
-func (p *ProductRepository) ToList(pageSize, pageIndex int) collections.PageList[product.DomainObject] {
-	lstProduct := p.Product.ToPageList(pageSize, pageIndex)
+func (p *ProductRepository) ToList(cateId, pageSize, pageIndex int) collections.PageList[product.DomainObject] {
+	ts := p.Product
+	// 需要筛选产品分类ID
+	if cateId > 0 {
+		ts.Where("cate_id = ?", cateId)
+	}
+	// 从数据库读数据
+	lstProduct := ts.ToPageList(pageSize, pageIndex)
 
 	// po 转 do
 	var lst collections.PageList[product.DomainObject]
 	lstProduct.MapToPageList(&lst)
-
 	return lst
 }
 

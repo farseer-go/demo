@@ -14,8 +14,14 @@ func ToEntity(productId int, repository product.Repository) DTO {
 	return dto
 }
 
-func ToList(pageIndex int, pageSize int, repository product.Repository) collections.PageList[DTO] {
-	lstDO := repository.ToList(pageIndex, pageSize)
+func ToList(cateId, pageSize, pageIndex int, repository product.Repository) collections.PageList[DTO] {
+	if pageIndex == 0 {
+		pageIndex = 1
+	}
+	if pageSize == 0 {
+		pageSize = 10
+	}
+	lstDO := repository.ToList(cateId, pageSize, pageIndex)
 	var lstDTO collections.PageList[DTO]
 	lstDO.MapToPageList(&lstDTO)
 	return lstDTO
