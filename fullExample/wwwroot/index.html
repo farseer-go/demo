@@ -82,6 +82,10 @@
             $("#nav").append(template("cateTmp",data))
         });
 
+        // 加载订单数量
+        $.get("/api/1.0/order/count",function(data,status){
+            $("#orderCount").html(data.Data)
+        });
         load();
     });
 </script>
@@ -91,7 +95,7 @@
     {{each Data}}
     <li class="layui-nav-item"><a href="/?cateId={{$value.Id}}">{{$value.Name}}</a></li>
     {{/each}}
-    <li class="layui-nav-item"><a href="">我的订单 <span class="layui-badge">3</span></a></li>
+    <li class="layui-nav-item"><a href="/orderlist.html">我的订单 <span id="orderCount" class="layui-badge">0</span></a></li>
     <li class="layui-nav-item"><a href="https://farseer-go.gitee.io/" target="_blank">farseer-go文档 <span class="layui-badge-dot"></span></a></li>
     <li class="layui-nav-item"><a href="https://github.com/farseer-go/fs" target="_blank">github <span class="layui-badge">v0.8</span></a></li>
 </script>
@@ -101,9 +105,9 @@
     {{each List}}
     <div class="layui-col-md3">
         <div class="layui-panel" style="text-align: center">
-            <div style="padding: 10px;"><img style="width:200px;height: 200px" src="{{$value.ImgSrc}}" /></div>
+            <div style="padding: 10px;"><a href="/product.html?Id={{$value.Id}}"><img style="width:200px;height: 200px" src="{{$value.ImgSrc}}" /></a></div>
             <div><span class="price"><i>¥</i><span class="price_txt">{{$value.Price}}.<span class="price_txt-decimal">00</span></span></span> 库存 <span style="color:#e1251b;font-weight: 700;" id="stock_{{$value.Id}}">{{$value.Stock}}</span></div>
-            <div>{{$value.Caption}}</div>
+            <div><a href="/product.html?Id={{$value.Id}}">{{$value.Caption}}</a></div>
         </div>
     </div>
     {{/each}}

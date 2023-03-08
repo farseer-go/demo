@@ -11,7 +11,7 @@ import (
 
 // InitProduct 注册产品仓储 ioc product.Repository
 func InitProduct() {
-	container.Register(func() product.Repository {
+	container.RegisterTransient(func() product.Repository {
 		// 初始化数据库上下文
 		// default = farseer.yaml > Database.default
 		// true = autoCreateTable
@@ -31,7 +31,7 @@ func (p *ProductRepository) ToEntity(productId int64) product.DomainObject {
 }
 
 func (p *ProductRepository) ToPageList(cateId, pageSize, pageIndex int) collections.PageList[product.DomainObject] {
-	ts := p.Product
+	ts := p.Product.Select("Id", "Caption", "ImgSrc", "Price")
 	// 需要筛选产品分类ID
 	if cateId > 0 {
 		ts.Where("cate_id = ?", cateId)

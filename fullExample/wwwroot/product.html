@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>farseer-go框架使用演示</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <script src="/layui/layui.js" charset="utf-8"></script>
+    <script src="/js/template-web.js" charset="utf-8"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <style>
+        .price {
+            display: inline-block;
+            font-size: 16px;
+            line-height: 18px;
+            height: 18px;
+            color: #e1251b;
+        }
+        .price_txt {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: arial,sans-serif;
+        }
+        .price_txt-decimal {
+            font-size: 12px;
+        }
+        .descr{
+            line-height: 40px;
+            padding: 0 40px;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-row layui-col-space1">
+    <ul id="nav" class="layui-nav layui-bg-molv" lay-filter="">
+        <li class="layui-nav-item layui-this"><a href="/">首页</a></li>
+    </ul>
+</div>
+<div class="layui-container">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>商品信息</legend>
+    </fieldset>
+    <div id="productContainer" class="layui-row layui-col-space30"></div>
+    <div class="descr">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>介绍</legend>
+        </fieldset>
+        <p>基于Golang模块化完整的基础设施框架，创建现代化Web应用和APIs</p>
+
+        <p>使用目前最为流行的组件，并用模块化技术来使用这些组件。</p>
+
+        <p>框架完美支持 DDD领域驱动 的战术设计，如仓储资源库、应用层事务、领域事件、应用层动态WebAPI。</p>
+
+        <img src="/images/img.png" style="width:80%;height: 80%"/>
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>有什么特点？</legend>
+        </fieldset>
+        <p>统一配置：所有的配置被整合到./farseer.yaml</p>
+
+        <p>优雅：所有的模块都遵循开发者体验优先为原则。</p>
+
+        <p>模块化：供了完整的模块化系统，使你能够开发可重复使用的应用程序模块。</p>
+
+        <p>领域驱动：帮助你实现基于DDD的分层架构并构建可维护的代码库。</p>
+
+        <p>链路追踪（下个版本推出）：如果您使用框架中的Orm、Redis、Http、Grpc、ES、MQ、EventBus、Task、fSchedule，将隐式为您实现链路追踪，并提供API请求日志、慢查询。</p>
+    </div>
+</div>
+<script>
+    // 获取Url参数
+    function getParam(name) {
+        let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        let r = window.location.search.substr(1).match(reg);
+        if (r!=null) return unescape(r[2]); return null;
+    }
+
+    var Id = getParam("Id");
+    var laypage;
+
+    layui.use(['element','laypage', 'layer'], function(){
+        $ = layui.jquery;
+        laypage = layui.laypage, layer = layui.layer;
+
+        // 加载产品分类
+        $.get("/api/1.0/cate/list",function(data,status){
+            $("#nav").append(template("cateTmp",data))
+        });
+
+        // 加载订单数量
+        $.get("/api/1.0/order/count",function(data,status){
+            $("#orderCount").html(data.Data)
+        });
+
+        // 加载产品信息
+        $.get("/api/1.0/product/info?productId="+Id,function(data,status){
+            $("#productContainer").append(template("productTmp",data.Data))
+        });
+
+        $(document).on('click','#btnBuy',function(){
+            // 下单
+            $.post("/api/1.0/product/buy", {productId:Id} ,function(data,status){
+                if (data.StatusCode == 200){
+                    layer.alert('下单成功', {icon: 1,anim: 5,icon: 6,yes:function() {
+                            window.location.href = "/orderlist.html";
+                        }});
+                }
+            });
+        });
+    });
+</script>
+
+<!--导航模板-->
+<script id="cateTmp" type="text/html">
+    {{each Data}}
+    <li class="layui-nav-item"><a href="/?cateId={{$value.Id}}">{{$value.Name}}</a></li>
+    {{/each}}
+    <li class="layui-nav-item"><a href="/orderlist.html">我的订单 <span id="orderCount" class="layui-badge">0</span></a></li>
+    <li class="layui-nav-item"><a href="https://farseer-go.gitee.io/" target="_blank">farseer-go文档 <span class="layui-badge-dot"></span></a></li>
+    <li class="layui-nav-item"><a href="https://github.com/farseer-go/fs" target="_blank">github <span class="layui-badge">v0.8</span></a></li>
+</script>
+
+<!--产品模板-->
+<script id="productTmp" type="text/html">
+    <div class="layui-col-md3">
+        <div class="layui-panel" style="text-align: center">
+            <div style="padding: 10px;"><img style="width:200px;height: 200px" src="{{ImgSrc}}" /></div>
+        </div>
+    </div>
+    <div class="layui-col-md9">
+        <div style="color:#e1251b;font-weight: 700;font-size: 22px">{{Caption}}</div>
+        <hr/>
+        <div>{{CateName}} <span class="price"><i>¥</i><span class="price_txt">{{Price}}.<span class="price_txt-decimal">00</span></span></span></div>
+        <div style="background-color: #F6F6F6;width:100%;height: 60px;margin-top: 10px;padding: 10px">{{Desc}}</div>
+        <div style="line-height:50px;height: 50px;margin-top: 10px;">
+        库存 <span style="color:#e1251b;font-weight: 700;" id="stock_{{Id}}">{{Stock}}</span>
+        <button id="btnBuy" type="button" class="layui-btn layui-btn-radius" style="margin-top: 10px;background-color:#df3033">立即购买</button>
+        </div>
+    </div>
+</script>
+</body>
+</html>

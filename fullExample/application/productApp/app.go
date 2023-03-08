@@ -4,14 +4,18 @@ import (
 	"fullExample/domain/product"
 	"fullExample/domain/stock"
 	"github.com/farseer-go/collections"
+	"github.com/farseer-go/fs/container"
+	"github.com/farseer-go/fs/core"
 	"github.com/farseer-go/mapper"
 )
 
 // ToEntity 查看产品详细信息
 // repository通过container自动注入实现进来
-func ToEntity(productId int64, repository product.Repository) DTO {
-	do := repository.ToEntity(productId)
+func ToEntity(productId int64, productRepository product.Repository, stockRepository stock.Repository) DTO {
+	do := productRepository.ToEntity(productId)
 	dto := mapper.Single[DTO](do)
+	// 获取库存
+	dto.Stock = stockRepository.Get(productId)
 	return dto
 }
 
@@ -41,4 +45,20 @@ func ToList(cateId, pageSize, pageIndex int, productRepository product.Repositor
 		lstDTO.List.Set(i, item)
 	}
 	return lstDTO
+}
+
+// Buy 购买商品
+// productRepository：产品仓储，webapi自动注入实例
+// stockRepository：库存仓储，webapi自动注入实例
+// webapi注入请参考：https://farseer-go.gitee.io/#/web/webapi/container
+func Buy(productId int64, productRepository product.Repository, stockRepository stock.Repository) {
+	// 减库存，剩余库存>0 ，扣减成功
+	stockVal := stockRepository.Set(productId, -1)
+	if stockVal > -1 {
+		// 把产品信息查出来
+		productDO := productRepository.ToEntity(productId)
+		// 发布下单事件
+		buyOrderEvent := container.Resolve[core.IEvent]("buyOrder")
+		_ = buyOrderEvent.Publish(&productDO)
+	}
 }

@@ -26,6 +26,8 @@ func (module Module) PostInitialize() {
 	repository.InitProduct()
 	// 初始化产品仓储
 	repository.InitStock()
+	// 初始化订单仓储
+	repository.InitOrder()
 
 	// 为了方便演示，自动初始化产品分类
 	procateRepository := container.Resolve[procate.Repository]()
