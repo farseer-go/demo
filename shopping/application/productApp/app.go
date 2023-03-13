@@ -11,7 +11,7 @@ import (
 
 // ToEntity 查看商品详细信息
 // repository通过container自动注入实现进来
-func ToEntity(productId int64, productRepository product.Repository, stockRepository stock.Repository) DTO {
+func ToEntity(productId int64, productRepository product.Repository, stockRepository stock.Repository) DTO { //
 	do := productRepository.ToEntity(productId)
 	dto := mapper.Single[DTO](do)
 	// 获取库存

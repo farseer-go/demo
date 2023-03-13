@@ -20,6 +20,7 @@ func (module Module) DependsModule() []modules.FarseerModule {
 	// 这些模块都是farseer-go内置的模块
 	return []modules.FarseerModule{redis.Module{}, data.Module{}, eventBus.Module{}, queue.Module{}}
 }
+
 func (module Module) PostInitialize() {
 	// 初始化商品分类仓储
 	repository.InitProCate()

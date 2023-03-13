@@ -16,28 +16,22 @@ func main() {
 		// 商品分类列表
 		// get http://localhost:8888/api/1.0/cate/list
 		webapi.RegisterGET("/cate/list", procateApp.ToList)
-
 		// 购买商品
 		// get http://localhost:8888/api/1.0/product/buy
 		webapi.RegisterPOST("/product/buy", productApp.Buy)
-
 		// 商品信息
 		// get http://localhost:8888/api/1.0/product/info?productId=1
 		webapi.RegisterGET("/product/info", productApp.ToEntity)
-
 		// 商品列表
 		// get http://localhost:8888/api/1.0/product/list?pageIndex=1&pageSize=3&cateId=0
 		webapi.RegisterGET("/product/list", productApp.ToList, "cateId", "pageSize", "pageIndex", "", "")
-
 		// 订单列表
 		// get http://localhost:8888/api/1.0/order/list?pageIndex=1&pageSize=3
 		webapi.RegisterGET("/order/list", orderApp.ToList, "pageSize", "pageIndex", "")
-
 		// 订单数量
 		// get http://localhost:8888/api/1.0/order/count
 		webapi.RegisterGET("/order/count", orderApp.Count)
 	})
-
 	// 让所有的返回值，包含在core.ApiResponse中
 	webapi.UseApiResponse()
 	// 使用静态文件 在根目录./wwwroot中的文件
