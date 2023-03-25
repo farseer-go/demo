@@ -31,13 +31,11 @@ func (p *ProductRepository) ToEntity(productId int64) product.DomainObject {
 }
 
 func (p *ProductRepository) ToPageList(cateId, pageSize, pageIndex int) collections.PageList[product.DomainObject] {
-	ts := p.Product.Select("Id", "Caption", "ImgSrc", "Price")
 	// 需要筛选商品分类ID
-	if cateId > 0 {
-		ts.Where("cate_id = ?", cateId)
-	}
-	// 从数据库读数据
-	lstProduct := ts.ToPageList(pageSize, pageIndex)
+	lstProduct := p.Product.
+		Select("Id", "Caption", "ImgSrc", "Price").
+		WhereIgnoreLessZero("cate_id = ?", cateId).
+		ToPageList(pageSize, pageIndex)
 
 	// po 转 do
 	var lst collections.PageList[product.DomainObject]
@@ -48,7 +46,6 @@ func (p *ProductRepository) ToPageList(cateId, pageSize, pageIndex int) collecti
 func (p *ProductRepository) ToList() collections.List[product.DomainObject] {
 	// 从数据库读数据
 	lstProduct := p.Product.ToList()
-
 	// po 转 do
 	return mapper.ToList[product.DomainObject](lstProduct)
 }
