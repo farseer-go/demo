@@ -10,6 +10,7 @@ import (
 	"shopping/domain/procate"
 	"shopping/domain/product"
 	"shopping/infrastructure/repository"
+	"shopping/infrastructure/repository/context"
 )
 
 type Module struct {
@@ -22,6 +23,8 @@ func (module Module) DependsModule() []modules.FarseerModule {
 }
 
 func (module Module) PostInitialize() {
+	// 初始化数据库上下文
+	context.InitMysqlContext()
 	// 初始化商品分类仓储
 	repository.InitProCate()
 	// 初始化商品仓储

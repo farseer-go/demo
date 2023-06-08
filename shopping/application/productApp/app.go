@@ -2,7 +2,6 @@ package productApp
 
 import (
 	"github.com/farseer-go/collections"
-	"github.com/farseer-go/fs/container"
 	"github.com/farseer-go/fs/core"
 	"github.com/farseer-go/mapper"
 	"shopping/domain/product"
@@ -51,14 +50,18 @@ func ToList(cateId, pageSize, pageIndex int, productRepository product.Repositor
 // productRepository：商品仓储，webapi自动注入实例
 // stockRepository：库存仓储，webapi自动注入实例
 // webapi注入请参考：https://farseer-go.gitee.io/#/web/webapi/container
-func Buy(productId int64, productRepository product.Repository, stockRepository stock.Repository) {
+func Buy(productId int64, productRepository product.Repository, stockRepository stock.Repository, transaction core.ITransaction, buyOrderEvent core.IEvent) {
 	// 减库存，剩余库存>0 ，扣减成功
 	stockVal := stockRepository.Set(productId, -1)
 	if stockVal > -1 {
+
 		// 把商品信息查出来
 		productDO := productRepository.ToEntity(productId)
-		// 发布下单事件
-		buyOrderEvent := container.Resolve[core.IEvent]("buyOrder")
-		_ = buyOrderEvent.Publish(&productDO)
+
+		// 开启数据库事务
+		transaction.Transaction(func() {
+			// 发布下单事件
+			_ = buyOrderEvent.Publish(&productDO)
+		})
 	}
 }

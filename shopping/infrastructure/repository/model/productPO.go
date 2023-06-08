@@ -1,5 +1,6 @@
 package model
 
+// ProductPO 产品
 type ProductPO struct {
 	Id       int64   `gorm:"primaryKey;autoIncrement;comment:商品ID"`
 	CateId   int     `gorm:"type:int;not null;index:idx_cateId;comment:商品分类ID"`

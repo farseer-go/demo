@@ -3,14 +3,19 @@ package main
 import (
 	"github.com/farseer-go/fs"
 	"github.com/farseer-go/webapi"
+	"log"
+	"reflect"
+	"runtime"
 	"shopping/application/orderApp"
 	"shopping/application/procateApp"
 	"shopping/application/productApp"
+	"strings"
 )
 
 func main() {
 	fs.Initialize[StartupModule]("demo")
 
+	GetFunctionName(productApp.Buy)
 	// 让所有api带前缀："/api/1.0/"
 	webapi.Area("/api/1.0/", func() {
 		// 商品分类列表
@@ -18,7 +23,7 @@ func main() {
 		webapi.RegisterGET("/cate/list", procateApp.ToList)
 		// 购买商品
 		// get http://localhost:8888/api/1.0/product/buy
-		webapi.RegisterPOST("/product/buy", productApp.Buy)
+		webapi.RegisterPOST("/product/buy", productApp.Buy, "productId", "", "", "default", "buyOrder")
 		// 商品信息
 		// get http://localhost:8888/api/1.0/product/info?productId=1
 		webapi.RegisterGET("/product/info", productApp.ToEntity)
@@ -38,4 +43,29 @@ func main() {
 	webapi.UseStaticFiles()
 	// 运行web服务，端口配置在：farseer.yaml Webapi.Url 配置节点
 	webapi.Run()
+}
+
+func GetFunctionName(i interface{}, seps ...rune) string {
+	// 获取函数名称
+	pc := reflect.ValueOf(i).Pointer()
+	fn := runtime.FuncForPC(pc).Name()
+	log.Println(runtime.FuncForPC(pc).Name())
+	log.Println(runtime.FuncForPC(pc).FileLine(pc))
+	log.Println(runtime.FuncForPC(pc).Entry())
+	// 用 seps 进行分割
+	fields := strings.FieldsFunc(fn, func(sep rune) bool {
+		for _, s := range seps {
+			if sep == s {
+				return true
+			}
+		}
+		return false
+	})
+
+	// fmt.Println(fields)
+
+	if size := len(fields); size > 0 {
+		return fields[size-1]
+	}
+	return ""
 }
