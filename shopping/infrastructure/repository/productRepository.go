@@ -2,37 +2,31 @@ package repository
 
 import (
 	"github.com/farseer-go/collections"
-	"github.com/farseer-go/data"
 	"github.com/farseer-go/fs/container"
 	"github.com/farseer-go/mapper"
 	"shopping/domain/product"
+	"shopping/infrastructure/repository/context"
 	"shopping/infrastructure/repository/model"
 )
 
 // InitProduct 注册商品仓储 ioc product.Repository
 func InitProduct() {
-	container.RegisterTransient(func() product.Repository {
-		// 初始化数据库上下文
-		// default = farseer.yaml > Database.default
-		// true = autoCreateTable
-		return data.NewContext[ProductRepository]("default", true)
+	container.Register(func() product.Repository {
+		return &ProductRepository{}
 	})
 }
 
-type ProductRepository struct {
-	// 定义数据库表映射TableSet
-	Product data.TableSet[model.ProductPO] `data:"name=farseer_go_product"`
-}
+type ProductRepository struct{}
 
 func (p *ProductRepository) ToEntity(productId int64) product.DomainObject {
-	po := p.Product.Where("id", productId).ToEntity()
+	po := context.MysqlContextIns.Product.Where("id", productId).ToEntity()
 	// po 转 do
 	return mapper.Single[product.DomainObject](&po)
 }
 
 func (p *ProductRepository) ToPageList(cateId, pageSize, pageIndex int) collections.PageList[product.DomainObject] {
 	// 需要筛选商品分类ID
-	lstProduct := p.Product.
+	lstProduct := context.MysqlContextIns.Product.
 		Select("Id", "Caption", "ImgSrc", "Price").
 		WhereIgnoreLessZero("cate_id = ?", cateId).
 		ToPageList(pageSize, pageIndex)
@@ -45,16 +39,16 @@ func (p *ProductRepository) ToPageList(cateId, pageSize, pageIndex int) collecti
 
 func (p *ProductRepository) ToList() collections.List[product.DomainObject] {
 	// 从数据库读数据
-	lstProduct := p.Product.ToList()
+	lstProduct := context.MysqlContextIns.Product.ToList()
 	// po 转 do
 	return mapper.ToList[product.DomainObject](lstProduct)
 }
 
 func (p *ProductRepository) Count() int64 {
-	return p.Product.Count()
+	return context.MysqlContextIns.Product.Count()
 }
 
 func (p *ProductRepository) Add(product product.DomainObject) {
 	po := mapper.Single[model.ProductPO](&product)
-	_ = p.Product.Insert(&po)
+	_ = context.MysqlContextIns.Product.Insert(&po)
 }

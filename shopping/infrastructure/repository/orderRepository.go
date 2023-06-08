@@ -16,6 +16,7 @@ func InitOrder() {
 	})
 }
 
+// OrderRepository 订单仓储
 type OrderRepository struct{}
 
 func (p *OrderRepository) ToEntity(OrderId int64) order.DomainObject {
