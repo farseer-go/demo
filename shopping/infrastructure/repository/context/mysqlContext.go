@@ -2,7 +2,6 @@ package context
 
 import (
 	"github.com/farseer-go/data"
-	"github.com/farseer-go/fs/core"
 	"shopping/infrastructure/repository/model"
 )
 
@@ -11,8 +10,8 @@ var MysqlContextIns *MysqlContext
 
 // MysqlContext 数据库上下文
 type MysqlContext struct {
-	// 使用事务时必须定义
-	core.ITransaction
+	// 手动使用事务时必须定义
+	//core.ITransaction
 	// 定义数据库表 订单 映射TableSet
 	Order data.TableSet[model.OrderPO] `data:"name=farseer_go_order"`
 	// 定义数据库表 商品分类 映射TableSet
