@@ -41,13 +41,5 @@ func (p *OrderRepository) Count() int64 {
 
 func (p *OrderRepository) Add(Order order.DomainObject) {
 	po := mapper.Single[model.OrderPO](&Order)
-
-	//mysqlContext := context.MysqlContextIns
-	//mysqlContext.Begin()
-	//_ = mysqlContext.Order.Insert(&po)
-	//mysqlContext.Commit()
-
-	//context.MysqlContextIns.Transaction(func() {
 	_ = context.MysqlContextIns.Order.Insert(&po)
-	//})
 }

@@ -54,10 +54,8 @@ func Buy(productId int64, productRepository product.Repository, stockRepository 
 	// 减库存，剩余库存>0 ，扣减成功
 	stockVal := stockRepository.Set(productId, -1)
 	if stockVal > -1 {
-
 		// 把商品信息查出来
 		productDO := productRepository.ToEntity(productId)
-
 		// 开启数据库事务
 		transaction.Transaction(func() {
 			// 发布下单事件

@@ -11,6 +11,7 @@ var MysqlContextIns *MysqlContext
 
 // MysqlContext 数据库上下文
 type MysqlContext struct {
+	// 使用事务时必须定义
 	core.ITransaction
 	// 定义数据库表 订单 映射TableSet
 	Order data.TableSet[model.OrderPO] `data:"name=farseer_go_order"`
