@@ -3,6 +3,7 @@ package repository
 import (
 	"github.com/farseer-go/cache"
 	"github.com/farseer-go/collections"
+	"github.com/farseer-go/data/repository"
 	"github.com/farseer-go/fs/container"
 	"github.com/farseer-go/fs/parse"
 	"github.com/farseer-go/mapper"
@@ -42,11 +43,12 @@ func InitProCate() {
 	})
 }
 
-type ProCateRepository struct {
+type ProCateRepository struct { // IRepository 通用的仓储接口
+	repository.IRepository[procate.DomainObject]
 	Cache cache.ICacheManage[procate.DomainObject] `inject:"procate"` // 通过容器注入，获得实例
 }
 
-func (p *ProCateRepository) ToEntity(cateId int) procate.DomainObject {
+func (p *ProCateRepository) ToEntity(cateId any) procate.DomainObject {
 	item, _ := p.Cache.GetItem(cateId)
 	return item
 }
@@ -55,11 +57,12 @@ func (p *ProCateRepository) ToList() collections.List[procate.DomainObject] {
 	return p.Cache.Get()
 }
 
-func (p *ProCateRepository) Count() int {
-	return p.Cache.Count()
+func (p *ProCateRepository) Count() int64 {
+	return int64(p.Cache.Count())
 }
 
 func (p *ProCateRepository) Add(product procate.DomainObject) {
 	po := mapper.Single[model.ProCatePO](&product)
 	_ = context.MysqlContextIns.ProCate.Insert(&po)
+	p.Cache.SaveItem(product)
 }

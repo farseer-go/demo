@@ -1,17 +1,11 @@
 package procate
 
 import (
-	"github.com/farseer-go/collections"
+	"github.com/farseer-go/data/repository"
 )
 
 // Repository 商品分类仓储
 type Repository interface {
-	// ToEntity 获取商品分类
-	ToEntity(cateId int) DomainObject
-	// ToList 获取商品分类列表
-	ToList() collections.List[DomainObject]
-	// Count 获取商品分类数量
-	Count() int
-	// Add 添加商品分类
-	Add(product DomainObject)
+	// IRepository 通用的仓储接口
+	repository.IRepository[DomainObject]
 }

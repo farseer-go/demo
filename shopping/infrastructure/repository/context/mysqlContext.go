@@ -2,6 +2,10 @@ package context
 
 import (
 	"github.com/farseer-go/data"
+	"github.com/farseer-go/data/repository"
+	"shopping/domain/order"
+	"shopping/domain/procate"
+	"shopping/domain/product"
 	"shopping/infrastructure/repository/model"
 )
 
@@ -23,4 +27,7 @@ type MysqlContext struct {
 // InitMysqlContext 初始化上下文
 func InitMysqlContext() {
 	MysqlContextIns = data.NewContext[MysqlContext]("default", true)
+	repository.RegisterRepository[order.DomainObject](MysqlContextIns.Order)
+	repository.RegisterRepository[procate.DomainObject](MysqlContextIns.ProCate)
+	repository.RegisterRepository[product.DomainObject](MysqlContextIns.Product)
 }

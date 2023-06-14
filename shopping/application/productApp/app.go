@@ -30,7 +30,7 @@ func ToList(cateId, pageSize, pageIndex int, productRepository product.Repositor
 		pageSize = 10
 	}
 	// 从仓储接口获取数据
-	lstDO := productRepository.ToPageList(cateId, pageSize, pageIndex)
+	lstDO := productRepository.ToPageListByCateId(cateId, pageSize, pageIndex)
 
 	// 转成PageList
 	var lstDTO collections.PageList[DTO]
