@@ -27,6 +27,7 @@ type MysqlContext struct {
 // InitMysqlContext 初始化上下文
 func InitMysqlContext() {
 	MysqlContextIns = data.NewContext[MysqlContext]("default", true)
+	// 注册通用的仓储接口
 	repository.RegisterRepository[order.DomainObject](MysqlContextIns.Order)
 	repository.RegisterRepository[procate.DomainObject](MysqlContextIns.ProCate)
 	repository.RegisterRepository[product.DomainObject](MysqlContextIns.Product)
