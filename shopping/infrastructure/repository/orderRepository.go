@@ -2,7 +2,7 @@ package repository
 
 import (
 	"github.com/farseer-go/collections"
-	"github.com/farseer-go/data/repository"
+	"github.com/farseer-go/data"
 	"github.com/farseer-go/fs/container"
 	"shopping/domain/order"
 	"shopping/infrastructure/repository/context"
@@ -17,7 +17,7 @@ func InitOrder() {
 
 // OrderRepository 订单仓储
 type OrderRepository struct {
-	repository.IRepository[order.DomainObject]
+	data.IRepository[order.DomainObject]
 }
 
 func (p *OrderRepository) ToPageList(pageSize, pageIndex int) collections.PageList[order.DomainObject] {

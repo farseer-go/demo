@@ -2,7 +2,7 @@ package repository
 
 import (
 	"github.com/farseer-go/collections"
-	"github.com/farseer-go/data/repository"
+	"github.com/farseer-go/data"
 	"github.com/farseer-go/fs/container"
 	"shopping/domain/product"
 	"shopping/infrastructure/repository/context"
@@ -16,7 +16,7 @@ func InitProduct() {
 }
 
 type ProductRepository struct {
-	repository.IRepository[product.DomainObject]
+	data.IRepository[product.DomainObject]
 }
 
 func (p *ProductRepository) ToPageListByCateId(cateId, pageSize, pageIndex int) collections.PageList[product.DomainObject] {
