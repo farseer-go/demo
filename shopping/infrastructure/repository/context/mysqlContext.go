@@ -15,6 +15,7 @@ var MysqlContextIns *MysqlContext
 type MysqlContext struct {
 	// 手动使用事务时必须定义
 	//core.ITransaction
+	*data.InternalContext
 	// 定义数据库表 订单 映射TableSet
 	Order data.DomainSet[model.OrderPO, order.DomainObject] `data:"name=farseer_go_order"`
 	// 定义数据库表 商品分类 映射TableSet
