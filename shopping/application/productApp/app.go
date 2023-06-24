@@ -38,11 +38,9 @@ func ToList(cateId, pageSize, pageIndex int, productRepository product.Repositor
 
 	// 这里为了省事，直接读出所有商品的库存
 	stocks := stockRepository.GetAll()
-	for i := 0; i < lstDTO.List.Count(); i++ {
-		item := lstDTO.List.Index(i)
+	lstDTO.List.Foreach(func(item *DTO) {
 		item.Stock = stocks[item.Id]
-		lstDTO.List.Set(i, item)
-	}
+	})
 	return lstDTO
 }
 
