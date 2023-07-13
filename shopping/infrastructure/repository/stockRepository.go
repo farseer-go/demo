@@ -3,8 +3,8 @@ package repository
 import (
 	"github.com/farseer-go/fs/container"
 	"github.com/farseer-go/fs/parse"
-	"github.com/farseer-go/redis"
 	"shopping/domain/stock"
+	"shopping/infrastructure/repository/context"
 	"strconv"
 )
 
@@ -17,16 +17,15 @@ func InitStock() {
 }
 
 type StockRepository struct {
-	Redis redis.IClient `inject:"default"` // 使用farseer.yaml的Redis.default配置节点，并自动注入
 }
 
 func (receiver *StockRepository) Get(productId int64) int {
-	stockVal, _ := receiver.Redis.HashGet(stockKey, strconv.FormatInt(productId, 10))
+	stockVal, _ := context.RedisContextIns.HashGet(stockKey, strconv.FormatInt(productId, 10))
 	return parse.Convert(stockVal, 0)
 }
 
 func (receiver *StockRepository) GetAll() map[int64]int {
-	all, _ := receiver.Redis.HashGetAll(stockKey)
+	all, _ := context.RedisContextIns.HashGetAll(stockKey)
 	result := make(map[int64]int)
 	for k, v := range all {
 		result[parse.Convert(k, int64(0))] = parse.Convert(v, 0)
@@ -35,6 +34,6 @@ func (receiver *StockRepository) GetAll() map[int64]int {
 }
 
 func (receiver *StockRepository) Set(productId int64, val int) int {
-	stockVal, _ := receiver.Redis.HashIncrInt(stockKey, strconv.FormatInt(productId, 10), val)
+	stockVal, _ := context.RedisContextIns.HashIncrInt(stockKey, strconv.FormatInt(productId, 10), val)
 	return stockVal
 }
