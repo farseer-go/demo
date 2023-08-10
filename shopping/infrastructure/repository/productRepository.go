@@ -15,6 +15,8 @@ func InitProduct() {
 	})
 }
 
+// ProductRepository 产品仓储
+// @inject product.Repository
 type ProductRepository struct {
 	data.IRepository[product.DomainObject]
 }

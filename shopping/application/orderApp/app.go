@@ -1,3 +1,5 @@
+// Package orderApp
+// @area api/1.0
 package orderApp
 
 import (
@@ -5,10 +7,13 @@ import (
 	"shopping/domain/order"
 )
 
-// ToList 获取订单列表
+// List 获取订单列表
 // repository：订单仓储，webapi自动注入实例
 // webapi注入请参考：https://farseer-go.gitee.io/#/web/webapi/container
-func ToList(pageSize, pageIndex int, repository order.Repository) collections.PageList[order.DomainObject] {
+// @get {area}/order/{action}
+// @filter jwt auth
+// @message 查询成功
+func List(pageSize, pageIndex int, repository order.Repository) collections.PageList[order.DomainObject] {
 	if pageIndex == 0 {
 		pageIndex = 1
 	}
@@ -22,6 +27,9 @@ func ToList(pageSize, pageIndex int, repository order.Repository) collections.Pa
 // Count 获取订单数量
 // repository：订单仓储，webapi自动注入实例
 // webapi注入请参考：https://farseer-go.gitee.io/#/web/webapi/container
+// @get {area}/order/{action}
+// @filter jwt auth
+// @message 查询成功
 func Count(repository order.Repository) int64 {
 	return repository.Count()
 }

@@ -16,6 +16,7 @@ func InitOrder() {
 }
 
 // OrderRepository 订单仓储
+// @inject order.Repository
 type OrderRepository struct {
 	data.IRepository[order.DomainObject]
 }

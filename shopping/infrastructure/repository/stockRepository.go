@@ -16,6 +16,8 @@ func InitStock() {
 	})
 }
 
+// StockRepository 库存仓储
+// @inject stock.Repository
 type StockRepository struct {
 }
 

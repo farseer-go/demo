@@ -43,6 +43,8 @@ func InitProCate() {
 	})
 }
 
+// ProCateRepository 产品分类仓储
+// @inject procate.Repository
 type ProCateRepository struct { // IRepository 通用的仓储接口
 	data.IRepository[procate.DomainObject]
 	Cache cache.ICacheManage[procate.DomainObject] `inject:"procate"` // 通过容器注入，获得实例
