@@ -1,3 +1,4 @@
+// @area api/1.0
 package productApp
 
 import (
