@@ -9,11 +9,11 @@ import (
 	"shopping/infrastructure/repository/model"
 )
 
-// MysqlContextIns 初始化数据库上下文
-var MysqlContextIns *MysqlContext
+// MysqlContext 初始化数据库上下文
+var MysqlContext *mysqlContext
 
-// MysqlContext 数据库上下文
-type MysqlContext struct {
+// mysqlContext 数据库上下文
+type mysqlContext struct {
 	// 手动使用事务时必须定义
 	core.ITransaction
 	// 获取原生ORM框架（不使用TableSet或DomainSet）
@@ -28,5 +28,5 @@ type MysqlContext struct {
 
 // InitMysqlContext 初始化上下文
 func InitMysqlContext() {
-	MysqlContextIns = data.NewContext[MysqlContext]("default", true)
+	MysqlContext = data.NewContext[mysqlContext]("default", true)
 }

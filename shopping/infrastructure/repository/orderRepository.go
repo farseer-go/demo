@@ -16,14 +16,14 @@ func InitOrder() {
 }
 
 // OrderRepository 订单仓储
-// @inject order.Repository
+// @register order.Repository
 type OrderRepository struct {
 	data.IRepository[order.DomainObject]
 }
 
 func (p *OrderRepository) ToPageList(pageSize, pageIndex int) collections.PageList[order.DomainObject] {
 	// 从数据库读数据
-	lstOrder := context.MysqlContextIns.Order.Desc("create_at").ToPageList(pageSize, pageIndex)
+	lstOrder := context.MysqlContext.Order.Desc("create_at").ToPageList(pageSize, pageIndex)
 
 	// po 转 do
 	var lst collections.PageList[order.DomainObject]

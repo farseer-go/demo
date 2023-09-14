@@ -26,7 +26,7 @@ func InitProCate() {
 		// 万能的基础类型转换，将any转成int（也可以转成其它任意基础类型）
 		cateId := parse.Convert(cacheId, 0)
 		// 数据库中读取
-		po := context.MysqlContextIns.ProCate.Where("Id", cateId).ToEntity()
+		po := context.MysqlContext.ProCate.Where("Id", cateId).ToEntity()
 		do := mapper.Single[procate.DomainObject](&po)
 		// bool 表示数据是否存在
 		return do, do.Id > 0
@@ -34,7 +34,7 @@ func InitProCate() {
 	// 当集合不存于Redis时，则到数据库中获取（如果你的应用不需要，这里就不需要定义）
 	procateCache.SetListSource(func() collections.List[procate.DomainObject] {
 		// 数据库中读取
-		lst := context.MysqlContextIns.ProCate.ToList()
+		lst := context.MysqlContext.ProCate.ToList()
 		return mapper.ToList[procate.DomainObject](lst)
 	})
 
@@ -65,6 +65,6 @@ func (p *ProCateRepository) Count() int64 {
 
 func (p *ProCateRepository) Add(product procate.DomainObject) {
 	po := mapper.Single[model.ProCatePO](&product)
-	_ = context.MysqlContextIns.ProCate.Insert(&po)
+	_ = context.MysqlContext.ProCate.Insert(&po)
 	p.Cache.SaveItem(product)
 }

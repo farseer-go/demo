@@ -23,7 +23,7 @@ type ProductRepository struct {
 
 func (p *ProductRepository) ToPageListByCateId(cateId, pageSize, pageIndex int) collections.PageList[product.DomainObject] {
 	// 需要筛选商品分类ID
-	lstProduct := context.MysqlContextIns.Product.
+	lstProduct := context.MysqlContext.Product.
 		Select("Id", "Caption", "ImgSrc", "Price").
 		WhereIgnoreLessZero("cate_id = ?", cateId).
 		ToPageList(pageSize, pageIndex)
