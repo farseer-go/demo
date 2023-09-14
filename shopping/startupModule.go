@@ -20,7 +20,6 @@ func (module StartupModule) Initialize() {
 }
 
 func (module StartupModule) PostInitialize() {
-
 }
 
 func (module StartupModule) Shutdown() {
