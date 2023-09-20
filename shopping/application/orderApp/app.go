@@ -10,7 +10,7 @@ import (
 // List 获取订单列表
 // repository：订单仓储，webapi自动注入实例
 // webapi注入请参考：https://farseer-go.gitee.io/#/web/webapi/container
-// @get {area}/order/{action}
+// @get order/{action}
 // @filter jwt auth
 // @message 查询成功
 func List(pageSize, pageIndex int, repository order.Repository) collections.PageList[order.DomainObject] {
@@ -27,7 +27,7 @@ func List(pageSize, pageIndex int, repository order.Repository) collections.Page
 // Count 获取订单数量
 // repository：订单仓储，webapi自动注入实例
 // webapi注入请参考：https://farseer-go.gitee.io/#/web/webapi/container
-// @get {area}/order/{action}
+// @get order/{action}
 // @filter jwt auth
 // @message 查询成功
 func Count(repository order.Repository) int64 {
