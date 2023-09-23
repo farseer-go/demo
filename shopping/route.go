@@ -9,10 +9,10 @@ import (
 )
 
 var route = []webapi.Route{
-    {"GET", "/area/order/list", orderApp.List, "查询成功", []string{"pageSize", "pageIndex", ""}},
-    {"GET", "/area/order/count", orderApp.Count, "查询成功", []string{""}},
-    {"GET", "/cate/list", procateApp.List, "查询成功", []string{""}},
-    {"GET", "/product/info", productApp.ToEntity, "查询成功", []string{"productId", "", ""}},
-    {"GET", "/product/list", productApp.List, "查询成功", []string{"cateId", "pageSize", "pageIndex", "", ""}},
-    {"GET", "/product/buy", productApp.Buy, "下单成功", []string{"productId", "", "", "default", "buyOrder"}},
+	{"GET", "/area/order/list", orderApp.List, "查询成功", nil, []string{"pageSize", "pageIndex", ""}},
+	{"GET", "/area/order/count", orderApp.Count, "查询成功", nil, []string{""}},
+	{"GET", "/cate/list", procateApp.List, "查询成功", nil, []string{""}},
+	{"GET", "/product/info", productApp.ToEntity, "查询成功", nil, []string{"productId", "", ""}},
+	{"GET", "/product/list", productApp.List, "查询成功", nil, []string{"cateId", "pageSize", "pageIndex", "", ""}},
+	{"GET", "/product/buy", productApp.Buy, "下单成功", nil, []string{"productId", "", "", "default", "buyOrder"}},
 }
