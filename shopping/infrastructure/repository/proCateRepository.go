@@ -63,8 +63,11 @@ func (p *ProCateRepository) Count() int64 {
 	return int64(p.Cache.Count())
 }
 
-func (p *ProCateRepository) Add(product procate.DomainObject) {
+func (p *ProCateRepository) Add(product procate.DomainObject) error {
 	po := mapper.Single[model.ProCatePO](&product)
-	_ = context.MysqlContext.ProCate.Insert(&po)
+	if err := context.MysqlContext.ProCate.Insert(&po); err != nil {
+		return err
+	}
 	p.Cache.SaveItem(product)
+	return nil
 }
