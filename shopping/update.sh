@@ -8,7 +8,7 @@ go get github.com/farseer-go/etcd
 go get github.com/farseer-go/eventBus
 go get github.com/farseer-go/fs
 go get github.com/farseer-go/fSchedule
-go get github.com/farseer-go/linkTrack
+go get github.com/farseer-go/linkTrace
 go get github.com/farseer-go/mapper
 go get github.com/farseer-go/queue
 go get github.com/farseer-go/rabbit
