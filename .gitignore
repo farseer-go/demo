@@ -18,4 +18,4 @@ go.sum
 go.work.sum
 go.work
 log
-frameworkSize
+frameworkSize/
