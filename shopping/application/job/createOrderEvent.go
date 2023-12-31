@@ -1,7 +1,6 @@
 package job
 
 import (
-	"github.com/farseer-go/fs"
 	"github.com/farseer-go/fs/container"
 	"github.com/farseer-go/fs/core"
 	"github.com/farseer-go/fs/snowflake"
@@ -22,6 +21,6 @@ func CreateOrderEvent(message any, ea core.EventArgs) {
 		ProductPrice:   productDO.Price,
 		ProductCount:   1,
 		CreateAt:       time.Now(),
-		CreateId:       fs.AppId,
+		CreateId:       core.AppId,
 	})
 }
