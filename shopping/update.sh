@@ -1,18 +1,1 @@
-go get github.com/farseer-go/async
-go get github.com/farseer-go/cache
-go get github.com/farseer-go/cacheMemory
-go get github.com/farseer-go/collections
-go get github.com/farseer-go/data
-go get github.com/farseer-go/elasticSearch
-go get github.com/farseer-go/etcd
-go get github.com/farseer-go/eventBus
-go get github.com/farseer-go/fs
-go get github.com/farseer-go/fSchedule
-go get github.com/farseer-go/linkTrace
-go get github.com/farseer-go/mapper
-go get github.com/farseer-go/queue
-go get github.com/farseer-go/rabbit
-go get github.com/farseer-go/redis
-go get github.com/farseer-go/redisStream
-go get github.com/farseer-go/tasks
-go get github.com/farseer-go/webapi
+go get -u && go mod tidy
