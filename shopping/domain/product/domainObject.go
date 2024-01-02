@@ -8,5 +8,5 @@ type DomainObject struct {
 	Caption string  // 商品名称
 	Desc    string  // 商品描述
 	ImgSrc  string  // 商品图片
-	Price   float32 // 价格
+	Price   float64 // 价格
 }
