@@ -12,7 +12,7 @@ require (
 	github.com/farseer-go/queue v0.12.0
 	github.com/farseer-go/redis v0.11.0
 	github.com/farseer-go/tasks v0.11.0
-	github.com/farseer-go/webapi v0.11.0
+	github.com/farseer-go/webapi v0.12.0
 )
 
 require (
