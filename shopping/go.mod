@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/farseer-go/cache v0.11.0
-	github.com/farseer-go/collections v0.11.0
+	github.com/farseer-go/collections v0.12.0
 	github.com/farseer-go/data v0.11.0
 	github.com/farseer-go/eventBus v0.11.0
 	github.com/farseer-go/fs v0.12.0
