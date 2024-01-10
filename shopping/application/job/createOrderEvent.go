@@ -3,7 +3,7 @@ package job
 import (
 	"github.com/farseer-go/fs/container"
 	"github.com/farseer-go/fs/core"
-	"github.com/farseer-go/fs/snowflake"
+	"github.com/farseer-go/fs/sonyflake"
 	"shopping/domain/order"
 	"shopping/domain/product"
 	"time"
@@ -14,7 +14,7 @@ func CreateOrderEvent(message any, ea core.EventArgs) {
 	productDO := message.(*product.DomainObject)
 	orderRepository := container.Resolve[order.Repository]()
 	orderRepository.Add(order.DomainObject{
-		Id:             snowflake.GenerateId(),
+		Id:             sonyflake.GenerateId(),
 		ProductId:      productDO.Id,
 		ProductCaption: productDO.Caption,
 		ProductImgSrc:  productDO.ImgSrc,
