@@ -22,5 +22,7 @@ func (module Module) PostInitialize() {
 	tasks.Run("ProductReplenishment", 1*time.Minute, job.ProductReplenishmentJob, fs.Context)
 
 	// 注册下单事件
-	eventBus.RegisterEvent("buyOrder", job.CreateOrderEvent, job.NoticeWarehouseOrderEvent)
+	eventBus.RegisterEvent("buyOrder").
+		RegisterSubscribe("创建订单", job.CreateOrderEvent).
+		RegisterSubscribe("通知仓库", job.NoticeWarehouseOrderEvent)
 }
