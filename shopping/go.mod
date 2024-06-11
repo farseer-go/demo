@@ -8,12 +8,12 @@ require (
 	github.com/farseer-go/cache v0.14.0
 	github.com/farseer-go/collections v0.14.0
 	github.com/farseer-go/data v0.14.0
-	github.com/farseer-go/eventBus v0.13.0
+	github.com/farseer-go/eventBus v0.14.0
 	github.com/farseer-go/fs v0.14.0
 	github.com/farseer-go/mapper v0.14.0
-	github.com/farseer-go/queue v0.13.0
-	github.com/farseer-go/redis v0.13.0
-	github.com/farseer-go/tasks v0.13.0
+	github.com/farseer-go/queue v0.14.0
+	github.com/farseer-go/redis v0.14.0
+	github.com/farseer-go/tasks v0.14.0
 	github.com/farseer-go/webapi v0.13.0
 )
 
