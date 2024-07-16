@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"shopping/domain/product"
 	"shopping/domain/stock"
+	"time"
 )
 
 // ProductReplenishmentJob 模拟供应商补货
@@ -18,7 +19,7 @@ func ProductReplenishmentJob(context *tasks.TaskContext) {
 	// 遍历商品，给每件商品进货
 	stockRepository := container.Resolve[stock.Repository]()
 	for i := 0; i < lstProduct.Count(); i++ {
-		stockVal := rand.Intn(5)
+		stockVal := rand.New(rand.NewSource(time.Now().UnixNano())).Intn(5)
 		productDO := lstProduct.Index(i)
 		stockRepository.Set(productDO.Id, stockVal)
 
