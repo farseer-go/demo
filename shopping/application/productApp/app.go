@@ -25,7 +25,7 @@ func ToEntity(productId int64, productRepository product.Repository, stockReposi
 // List 获取商品列表
 // productRepository：商品仓储，webapi自动注入实例
 // stockRepository：库存仓储，webapi自动注入实例
-// webapi注入请参考：https://farseer-go.gitee.io/#/web/webapi/container
+// webapi注入请参考：https://farseer-go.github.io/doc/#/web/webapi/container
 // @get product/{action}
 // @filter jwt auth
 // @message 查询成功
@@ -54,7 +54,7 @@ func List(cateId, pageSize, pageIndex int, productRepository product.Repository,
 // Buy 购买商品
 // productRepository：商品仓储，webapi自动注入实例
 // stockRepository：库存仓储，webapi自动注入实例
-// webapi注入请参考：https://farseer-go.gitee.io/#/web/webapi/container
+// webapi注入请参考：https://farseer-go.github.io/doc/#/web/webapi/container
 // @get product/{action}
 // @filter jwt auth
 // @di transaction default

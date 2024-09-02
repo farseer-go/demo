@@ -8,7 +8,7 @@ import (
 
 // List 读取商品分类列表
 // repository：商品分类仓储，webapi自动注入实例
-// webapi注入请参考：https://farseer-go.gitee.io/#/web/webapi/container
+// webapi注入请参考：https://farseer-go.github.io/doc/#/web/webapi/container
 // @get cate/{action}
 // @filter jwt auth
 // @message 查询成功

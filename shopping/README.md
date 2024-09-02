@@ -13,8 +13,8 @@
 * 首页：按商品分类，浏览商品
 * 商品：商品详情，下单
 * 订单：下订单后，通过事件驱动来通知商品减库存、保存订单数据
-  ![img.png](https://farseer-go.gitee.io/images/shopping_1.png)
-  ![img.png](https://farseer-go.gitee.io/images/shopping_2.png)
+  ![img.png](https://farseer-go.github.io/doc/images/shopping_1.png)
+  ![img.png](https://farseer-go.github.io/doc/images/shopping_2.png)
 
 ## 分层介绍
 各目录的作用：
@@ -62,7 +62,7 @@
 - startupModule.go：启动模块
 - farseer.yaml：配置文件
 
-![](https://farseer-go.gitee.io/images/farseer-go.png)
+![](https://farseer-go.github.io/doc/images/farseer-go.png)
 
 ## 数据库表
 ### ProductPO 商品
