@@ -19,3 +19,4 @@ go.work.sum
 go.work
 log
 /frameworkSize/
+*.DS_Store
