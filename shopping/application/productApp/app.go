@@ -2,11 +2,12 @@
 package productApp
 
 import (
+	"shopping/domain/product"
+	"shopping/domain/stock"
+
 	"github.com/farseer-go/collections"
 	"github.com/farseer-go/fs/core"
 	"github.com/farseer-go/mapper"
-	"shopping/domain/product"
-	"shopping/domain/stock"
 )
 
 // ToEntity 查看商品详细信息
@@ -40,9 +41,7 @@ func List(cateId, pageSize, pageIndex int, productRepository product.Repository,
 	lstDO := productRepository.ToPageListByCateId(cateId, pageSize, pageIndex)
 
 	// 转成PageList
-	var lstDTO collections.PageList[DTO]
-	lstDO.MapToPageList(&lstDTO)
-
+	lstDTO := mapper.ToPageList[DTO](lstDO)
 	// 这里为了省事，直接读出所有商品的库存
 	stocks := stockRepository.GetAll()
 	lstDTO.List.Foreach(func(item *DTO) {

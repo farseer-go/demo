@@ -1,11 +1,13 @@
 package repository
 
 import (
+	"shopping/domain/order"
+	"shopping/infrastructure/repository/context"
+
 	"github.com/farseer-go/collections"
 	"github.com/farseer-go/data"
 	"github.com/farseer-go/fs/container"
-	"shopping/domain/order"
-	"shopping/infrastructure/repository/context"
+	"github.com/farseer-go/mapper"
 )
 
 // InitOrder 注册商品仓储 ioc Order.Repository
@@ -24,9 +26,6 @@ type OrderRepository struct {
 func (p *OrderRepository) ToPageList(pageSize, pageIndex int) collections.PageList[order.DomainObject] {
 	// 从数据库读数据
 	lstOrder := context.MysqlContext.Order.Desc("create_at").ToPageList(pageSize, pageIndex)
-
 	// po 转 do
-	var lst collections.PageList[order.DomainObject]
-	lstOrder.MapToPageList(&lst)
-	return lst
+	return mapper.ToPageList[order.DomainObject](lstOrder)
 }

@@ -1,11 +1,13 @@
 package repository
 
 import (
+	"shopping/domain/product"
+	"shopping/infrastructure/repository/context"
+
 	"github.com/farseer-go/collections"
 	"github.com/farseer-go/data"
 	"github.com/farseer-go/fs/container"
-	"shopping/domain/product"
-	"shopping/infrastructure/repository/context"
+	"github.com/farseer-go/mapper"
 )
 
 // InitProduct 注册商品仓储 ioc product.Repository
@@ -29,7 +31,5 @@ func (p *ProductRepository) ToPageListByCateId(cateId, pageSize, pageIndex int) 
 		ToPageList(pageSize, pageIndex)
 
 	// po 转 do
-	var lst collections.PageList[product.DomainObject]
-	lstProduct.MapToPageList(&lst)
-	return lst
+	return mapper.ToPageList[product.DomainObject](lstProduct)
 }
