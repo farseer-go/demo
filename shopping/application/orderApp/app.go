@@ -3,15 +3,16 @@
 package orderApp
 
 import (
-	"github.com/farseer-go/collections"
 	"shopping/domain/order"
+
+	"github.com/farseer-go/collections"
 )
 
 // List 获取订单列表
 // repository：订单仓储，webapi自动注入实例
 // webapi注入请参考：https://farseer-go.github.io/doc/#/web/webapi/container
 // @get order/{action}
-// @filter jwt auth
+// @filter Jwt Auth
 // @message 查询成功
 func List(pageSize, pageIndex int, repository order.Repository) collections.PageList[order.DomainObject] {
 	if pageIndex == 0 {
@@ -28,7 +29,7 @@ func List(pageSize, pageIndex int, repository order.Repository) collections.Page
 // repository：订单仓储，webapi自动注入实例
 // webapi注入请参考：https://farseer-go.github.io/doc/#/web/webapi/container
 // @get order/{action}
-// @filter jwt auth
+// @filter Jwt Auth
 // @message 查询成功
 func Count(repository order.Repository) int64 {
 	return repository.Count()

@@ -13,7 +13,7 @@ import (
 // ToEntity 查看商品详细信息
 // repository通过container自动注入实现进来
 // @get product/info
-// @filter jwt auth
+// @filter Jwt Auth
 // @message 查询成功
 func ToEntity(productId int64, productRepository product.Repository, stockRepository stock.Repository) DTO { //
 	do := productRepository.ToEntity(productId)
@@ -28,7 +28,7 @@ func ToEntity(productId int64, productRepository product.Repository, stockReposi
 // stockRepository：库存仓储，webapi自动注入实例
 // webapi注入请参考：https://farseer-go.github.io/doc/#/web/webapi/container
 // @get product/{action}
-// @filter jwt auth
+// @filter Jwt Auth
 // @message 查询成功
 func List(cateId, pageSize, pageIndex int, productRepository product.Repository, stockRepository stock.Repository) collections.PageList[DTO] {
 	if pageIndex == 0 {
@@ -54,8 +54,8 @@ func List(cateId, pageSize, pageIndex int, productRepository product.Repository,
 // productRepository：商品仓储，webapi自动注入实例
 // stockRepository：库存仓储，webapi自动注入实例
 // webapi注入请参考：https://farseer-go.github.io/doc/#/web/webapi/container
-// @get product/{action}
-// @filter jwt auth
+// @post product/{action}
+// @filter Jwt Auth
 // @di transaction default
 // @di buyOrderEvent buyOrder
 // @message 下单成功

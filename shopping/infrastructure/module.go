@@ -1,16 +1,17 @@
 package infrastructure
 
 import (
+	"shopping/domain/procate"
+	"shopping/domain/product"
+	"shopping/infrastructure/repository"
+	"shopping/infrastructure/repository/context"
+
 	"github.com/farseer-go/data"
 	"github.com/farseer-go/eventBus"
 	"github.com/farseer-go/fs/container"
 	"github.com/farseer-go/fs/modules"
 	"github.com/farseer-go/queue"
 	"github.com/farseer-go/redis"
-	"shopping/domain/procate"
-	"shopping/domain/product"
-	"shopping/infrastructure/repository"
-	"shopping/infrastructure/repository/context"
 )
 
 type Module struct {
@@ -23,6 +24,8 @@ func (module Module) DependsModule() []modules.FarseerModule {
 }
 
 func (module Module) PostInitialize() {
+	// 初始化redis
+	context.InitRedisContext()
 	// 初始化数据库上下文
 	context.InitMysqlContext()
 	// 初始化商品分类仓储

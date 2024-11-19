@@ -85,12 +85,12 @@
         laypage = layui.laypage, layer = layui.layer;
 
         // 加载商品分类
-        $.get("/api/1.0/cate/list",function(data,status){
+        $.get("/api/1.0/cate/List",function(data,status){
             $("#nav").append(template("cateTmp",data))
         });
 
         // 加载订单数量
-        $.get("/api/1.0/order/count",function(data,status){
+        $.get("/api/1.0/order/Count",function(data,status){
             $("#orderCount").html(data.Data)
         });
 
@@ -101,7 +101,7 @@
 
         $(document).on('click','#btnBuy',function(){
             // 下单
-            $.post("/api/1.0/product/buy", {productId:Id} ,function(data,status){
+            $.post("/api/1.0/product/Buy", {productId:Id} ,function(data,status){
                 if (data.StatusCode == 200){
                     layer.alert('下单成功', {icon: 1,anim: 5,icon: 6,yes:function() {
                             window.location.href = "/orderlist.html";

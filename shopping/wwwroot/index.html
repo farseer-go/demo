@@ -59,8 +59,9 @@
 
     // 读取商品列表
     function load() {
-        $.get("/api/1.0/product/list?cateId="+cateId+"&pageSize="+pageSize+"&pageIndex="+pageIndex,function(data,status){
+        $.get("/api/1.0/product/List?cateId="+cateId+"&pageSize="+pageSize+"&pageIndex="+pageIndex,function(data,status){
             recordCount = data.Data.RecordCount
+            
             $("#productList").html(template("productTmp",data.Data))
 
             // 自定义样式
@@ -78,12 +79,12 @@
         laypage = layui.laypage, layer = layui.layer;
 
         // 加载商品分类
-        $.get("/api/1.0/cate/list",function(data,status){
+        $.get("/api/1.0/cate/List",function(data,status){
             $("#nav").append(template("cateTmp",data))
         });
 
         // 加载订单数量
-        $.get("/api/1.0/order/count",function(data,status){
+        $.get("/api/1.0/order/Count",function(data,status){
             $("#orderCount").html(data.Data)
         });
         load();

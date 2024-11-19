@@ -1,11 +1,12 @@
 package repository
 
 import (
-	"github.com/farseer-go/fs/container"
-	"github.com/farseer-go/fs/parse"
 	"shopping/domain/stock"
 	"shopping/infrastructure/repository/context"
 	"strconv"
+
+	"github.com/farseer-go/fs/container"
+	"github.com/farseer-go/fs/parse"
 )
 
 const stockKey = "farseer_go_stock"
