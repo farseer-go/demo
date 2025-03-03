@@ -1,13 +1,15 @@
 package job
 
 import (
-	"github.com/farseer-go/fs/container"
-	"github.com/farseer-go/fs/flog"
-	"github.com/farseer-go/tasks"
 	"math/rand"
 	"shopping/domain/product"
 	"shopping/domain/stock"
 	"time"
+
+	"github.com/farseer-go/fs/color"
+	"github.com/farseer-go/fs/container"
+	"github.com/farseer-go/fs/flog"
+	"github.com/farseer-go/tasks"
 )
 
 // ProductReplenishmentJob 模拟供应商补货
@@ -23,6 +25,6 @@ func ProductReplenishmentJob(context *tasks.TaskContext) {
 		productDO := lstProduct.Index(i)
 		stockRepository.Set(productDO.Id, stockVal)
 
-		flog.Infof("商品%d %s 补货%s件", productDO.Id, productDO.Caption, flog.Red(stockVal))
+		flog.Infof("商品%d %s 补货%s件", productDO.Id, productDO.Caption, color.Red(stockVal))
 	}
 }
