@@ -7,6 +7,7 @@ import (
 
 	"github.com/farseer-go/collections"
 	"github.com/farseer-go/fs/core"
+	"github.com/farseer-go/fs/exception"
 	"github.com/farseer-go/mapper"
 )
 
@@ -16,11 +17,23 @@ import (
 // @filter Jwt Auth
 // @message 查询成功
 func ToEntity(productId int64, productRepository product.Repository, stockRepository stock.Repository) DTO { //
+	//A()
 	do := productRepository.ToEntity(productId)
 	dto := mapper.Single[DTO](do)
 	// 获取库存
 	dto.Stock = stockRepository.Get(productId)
 	return dto
+}
+
+func A() {
+	B()
+}
+func B() {
+	C()
+}
+
+func C() {
+	exception.ThrowRefuseException("测试异常")
 }
 
 // List 获取商品列表

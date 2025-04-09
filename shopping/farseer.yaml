@@ -4,6 +4,9 @@ Redis:
   default: "Server=192.168.1.8:6379,DB=13,Password=steden@123,ConnectTimeout=600000,SyncTimeout=10000,ResponseTimeout=10000"
 WebApi:
   Url: ":8888"
+LinkTrace:
+  Enable: false
+  PrintLog: true
 Log:
   LogLevel: "info"
   Component:
