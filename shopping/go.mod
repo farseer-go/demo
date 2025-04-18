@@ -5,17 +5,17 @@ go 1.23.0
 toolchain go1.23.3
 
 require (
-	github.com/farseer-go/cache v0.16.0
-	github.com/farseer-go/collections v0.16.0
-	github.com/farseer-go/data v0.16.0
-	github.com/farseer-go/eventBus v0.16.0
-	github.com/farseer-go/fs v0.16.1
-	github.com/farseer-go/linkTrace v0.16.0
-	github.com/farseer-go/mapper v0.16.0
-	github.com/farseer-go/queue v0.16.0
-	github.com/farseer-go/redis v0.16.0
-	github.com/farseer-go/tasks v0.16.0
-	github.com/farseer-go/webapi v0.16.0
+	github.com/farseer-go/cache v0.16.8
+	github.com/farseer-go/collections v0.16.8
+	github.com/farseer-go/data v0.16.8
+	github.com/farseer-go/eventBus v0.16.8
+	github.com/farseer-go/fs v0.16.8
+	github.com/farseer-go/linkTrace v0.16.8
+	github.com/farseer-go/mapper v0.16.8
+	github.com/farseer-go/queue v0.16.8
+	github.com/farseer-go/redis v0.16.8
+	github.com/farseer-go/tasks v0.16.8
+	github.com/farseer-go/webapi v0.16.8
 )
 
 require (
@@ -29,7 +29,7 @@ require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.9 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.26.0 // indirect
