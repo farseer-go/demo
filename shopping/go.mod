@@ -1,21 +1,19 @@
 module shopping
 
-go 1.23.0
-
-toolchain go1.23.3
+go 1.18.0
 
 require (
-	github.com/farseer-go/cache v0.16.8
-	github.com/farseer-go/collections v0.16.8
-	github.com/farseer-go/data v0.16.8
-	github.com/farseer-go/eventBus v0.16.8
-	github.com/farseer-go/fs v0.16.8
-	github.com/farseer-go/linkTrace v0.16.8
-	github.com/farseer-go/mapper v0.16.8
-	github.com/farseer-go/queue v0.16.8
-	github.com/farseer-go/redis v0.16.8
-	github.com/farseer-go/tasks v0.16.8
-	github.com/farseer-go/webapi v0.16.8
+	github.com/farseer-go/cache v0.17.3
+	github.com/farseer-go/collections v0.17.3
+	github.com/farseer-go/data v0.17.3
+	github.com/farseer-go/eventBus v0.17.3
+	github.com/farseer-go/fs v0.17.3
+	github.com/farseer-go/linkTrace v0.17.3
+	github.com/farseer-go/mapper v0.17.3
+	github.com/farseer-go/queue v0.17.3
+	github.com/farseer-go/redis v0.17.3
+	github.com/farseer-go/tasks v0.17.3
+	github.com/farseer-go/webapi v0.17.3
 )
 
 require (
@@ -29,23 +27,23 @@ require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/gabriel-vasile/mimetype v1.4.9 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.12 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.26.0 // indirect
+	github.com/go-playground/validator/v10 v10.30.1 // indirect
 	github.com/go-redis/redis/v8 v8.11.5 // indirect
-	github.com/go-sql-driver/mysql v1.9.2 // indirect
-	github.com/golang-jwt/jwt/v5 v5.2.2 // indirect
+	github.com/go-sql-driver/mysql v1.9.3 // indirect
+	github.com/golang-jwt/jwt/v5 v5.3.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
-	github.com/timandy/routine v1.1.5 // indirect
-	golang.org/x/crypto v0.37.0 // indirect
-	golang.org/x/net v0.39.0 // indirect
-	golang.org/x/sys v0.32.0 // indirect
-	golang.org/x/text v0.24.0 // indirect
+	github.com/timandy/routine v1.1.6 // indirect
+	golang.org/x/crypto v0.47.0 // indirect
+	golang.org/x/net v0.49.0 // indirect
+	golang.org/x/sys v0.40.0 // indirect
+	golang.org/x/text v0.33.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	gorm.io/driver/mysql v1.5.7 // indirect
-	gorm.io/gorm v1.25.12 // indirect
+	gorm.io/driver/mysql v1.6.0 // indirect
+	gorm.io/gorm v1.31.1 // indirect
 	gorm.io/hints v1.1.2 // indirect
 )
