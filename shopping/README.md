@@ -60,7 +60,7 @@
   - module.go：接口层模块
 - /wwwroot/：静态页面
 - startupModule.go：启动模块
-- farseer.yaml：配置文件
+- config.yaml：配置文件
 
 ![](https://farseer-go.github.io/doc/images/farseer-go.png)
 
@@ -92,4 +92,4 @@ key：`procate`
 > 数据库表`farseer_go_procate`与Redis同步
 
 ## 运行
-需自行配置数据库、Redis环境：到farseer.yaml配置文件中，配置`Database.default`、`Redis.default`
+需自行配置数据库、Redis环境：到config.yaml配置文件中，配置`Database.default`、`Redis.default`
